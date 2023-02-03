@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IOT APP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=Itim&family=Lora&family=Rammetto+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="container" class="container">
+        <header class="row">
+            <img class="socket-image" src="images/socket.png" alt="socket">
+            <div class="col-12">
+                <div class="heading">
+                    <span id="heading-title" class="heading-title">Hi Stranger</span>
+                    <span class="heading-subtitle">
+                        You're losing money every second
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-title">Spent today</div>
+                    <div id="spent-today" class="card-value">0.27<span class="card-value-unit">€</span></div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-title">Spent this month</div>
+                    <div id="spent-month" class="card-value">131<span class="card-value-unit">€</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="settings-modal" class="settings-modal">
+        <span class="modal-title">Settings</span>
+        <span class="modal-question">What should I call you?</span>
+        <div class="inputContainer">
+            <input id="input-name" />
+        </div>
+        <span class="modal-question">What's your electricity bill starting day?</span>
+        <div class="inputContainer">
+            <input id="input-day" />
+        </div>
+        <button id="modal-button" class="modal-button">
+            Done
+        </button>
+    </div>
+
+    <script type="application/javascript" src="./main.js"></script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+// COLORS
+$background-color: #FFACFF;
+$primary_color: #c6538c;
+$primary_color_light: #FFCBFF;
+$secondary_color: #7DDEFC;
+$tertiary_color: #FFEB2E;
+$dark: #000000;
+
+// GRID
+$grid-width: 114rem;
+$gutter-vertical: 8rem;
+$gutter-horizontal: 3rem;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+body {
+  background-image: url("../images/paper-texture.jpg");
+  background-color: #e2e0db;
+  background-blend-mode: multiply;
+  background-size: cover;
+
+  font-family: 'Lora', serif;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 1.7;
+  color: $dark;
+}
+
+.container {
+  width: 75vw;
+  margin: auto;
+}
+
+.row {
+  width: 100%;
+}
+
+.col-6 {
+  display: inline-flex;
+  width: 49.8%;
+}
+
+
+header {
+  margin: 6rem;
+}
+
+.heading {
+  font-weight: 100;
+  color: $dark;
+
+  &-title {
+    display: block;
+    font-family: 'Rammetto One', cursive;
+    font-size: 10rem;
+    margin-bottom: -3rem;
+    /* animation properties */
+    animation-name: left-to-right;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+  }
+
+  &-subtitle {
+    display: block;
+    font-family: 'Lora', serif;
+    font-size: 5rem;
+    /* animation properties */
+    animation-name: fadein;
+    animation-duration: 4s;
+    animation-timing-function: ease;
+  }
+}
+
+@keyframes left-to-right {
+  0% {
+    margin-left: -20rem;
+    opacity: 0;
+  }
+  66% {
+    margin-left: -20rem;
+    opacity: 0;
+  }
+  100% {
+    margin-left: 0;
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.smiley-image {
+  width: 5rem;
+  height: 5rem;
+  margin-left: 2rem;
+}
+
+.socket-image {
+  width: 15rem;
+  height: 15rem;
+  float: left;
+  margin-left: 4rem;
+  margin-bottom: -1rem;
+
+  /* animation properties */
+  animation-name: socket-bounce-animation;
+  animation-duration: .5s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+}
+
+@keyframes socket-bounce-animation {
+  from {
+    margin-top: 0;
+    margin-left: 0;
+  }
+  to {
+    height: 14rem;
+    width: 15.5rem;
+    margin-left: -.25rem;
+    margin-top: 1rem;
+  }
+}
+
+.card {
+  width: 35vw;
+  height: 35vw;
+  max-width: 35rem;
+  max-height: 35rem;
+  margin-top: 3rem;
+  display: inline-block;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  box-shadow: 0.6rem 0.6rem 1.4rem 0 rgb(0 0 0 / 20%), -0.8rem -0.8rem 1.8rem 0 rgb(255 255 255 / 55%);
+  border-radius: 4rem;
+  /* animation properties */
+  animation-name: top-to-bottom;
+  animation-duration: 4s;
+  animation-timing-funct4n: ease;
+
+  &-title {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    font-family: 'Itil', cursive;
+    font-size: 2vw;
+    font-weight: bold;
+    /* animation properties */
+    animation-name: fadein;
+    animation-duration: 6s;
+    animation-timing-function: ease;
+  }
+
+  &-value {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%,-30%);
+    font-family: 'Itil', cursive;
+    font-size: 9vw;
+    font-weight: bold;
+    &-unit {
+      font-size: 6vw;
+    }
+    /* animation properties */
+    animation-name: fadein;
+    animation-duration: 6s;
+    animation-timing-function: ease;
+  }
+
+}
+
+@keyframes top-to-bottom {
+  0% {
+    margin-top: -4rem;
+    opacity: 0;
+  }
+  75% {
+    margin-top: -4rem;
+    opacity: 0;
+  }
+  100% {
+    margin-top: 3rem;
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .card-title {
+    font-size: 3vw;
+  }
+  .card-value {
+    font-size: 13vw;
+  }
+  .card-value-unit {
+    font-size: 8vw;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .card-title {
+    top: 20%;
+    font-size: 2vw;
+  }
+  .card-value {
+    font-size: 5vw;
+  }
+  .card-value-unit {
+    font-size: 3.5vw;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  .card-title {
+    top: 20%;
+    font-size: 1.5vw;
+  }
+  .card-value {
+    font-size: 3.5vw;
+  }
+  .card-value-unit {
+    font-size: 3vw;
+  }
+}
+
+.row {
+  max-width: $grid-width;
+  margin: 0 auto;
+  display: block;
+
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+  }
+
+  .col-12 {
+    width: 100%;
+    float: left;
+  }
+
+  .col-6 {
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+    }
+  }
+}
+
+
+.settings-modal {
+  width: 50vw;
+  max-width: 50rem;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%);
+  padding-bottom: 6rem;
+  display: none;
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  box-shadow: 0.6rem 0.6rem 1.4rem 0 rgb(0 0 0 / 20%), -0.8rem -0.8rem 1.8rem 0 rgb(255 255 255 / 55%);
+  border-radius: 4rem;
+
+  .modal-title {
+    font-size: 4rem;
+    margin: 2rem 4rem;
+    display: block;
+  }
+
+  .modal-question {
+    font-size: 2rem;
+    margin: 2rem 4rem;
+    display: block;
+  }
+
+}
+
+
+.modal-button {
+  background: transparent;
+  border: none;
+  width: 85%;
+  height: 5rem;
+  cursor: pointer;
+  margin: 4rem auto 1rem auto;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  box-shadow: -2px -2px 6px rgba(#fff, .6), 2px 2px 12px #8d8f91;
+}
+
+input {
+  background: transparent;
+  padding: 1.6rem 3.2rem;
+  border: none;
+  display: block;
+  font-size: 2rem;
+  color: $dark;
+  -webkit-appearance: none;
+  transition: all 240ms ease-out;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    color: $dark;
+    background-color: lighten(#dcdcdc, 3%);
+  }
+};
+
+.inputContainer {
+
+  width: 85%;
+  margin: auto;
+
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+
+  &:before,
+  &:after {
+    left: 0;
+    top: 0;
+    display: block;
+    content: "";
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  &:before {
+    box-shadow: inset -2px -2px 4px rgba(255,255,255, .7);
+  }
+
+  &:after {
+    box-shadow: inset 1px 1px 3px #8d8f91, inset 2px 2px 6px #8d8f91;
+  }
+}
