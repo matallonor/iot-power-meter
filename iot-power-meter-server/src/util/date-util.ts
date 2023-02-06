@@ -1,4 +1,4 @@
-import { DB } from '../db/db';
+import { environment } from '../config/environment';
 
 export class DateUtil {
 
@@ -14,6 +14,6 @@ export class DateUtil {
         const today = new Date();
         const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         const yyyy = today.getFullYear();
-        return new Date(`${mm}/01/${yyyy}`);
+        return new Date(`${mm}/${environment.billingStartDay}/${yyyy}`);
     }
 }
