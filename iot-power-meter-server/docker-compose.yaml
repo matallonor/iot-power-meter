@@ -19,13 +19,8 @@ services:
       - influxdb_data:/var/lib/influxdb
       - influxdb_config:/etc/influxdb
     environment:
-      - INFLUXDB_CONFIG_PATH=/etc/influxdb/influxdb.conf
-      - DOCKER_INFLUXDB_INIT_MODE=setup
-      - DOCKER_INFLUXDB_INIT_USERNAME=admin
-      - DOCKER_INFLUXDB_INIT_PASSWORD=admin1234
-      - DOCKER_INFLUXDB_INIT_ORG=iot-power-meter
-      - DOCKER_INFLUXDB_INIT_BUCKET=power-consumption
-      - INFLUXDB_DB=power-consumption
+      - INFLUXDB_INIT_MODE=setup
+      - INFLUXDB_DB=iot_power_meter
      
   grafana:
     image: grafana/grafana
