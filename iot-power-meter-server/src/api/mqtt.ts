@@ -3,7 +3,7 @@ import { ISubscriptionGrant, MqttClient } from 'mqtt';
 import { IConnackPacket } from 'mqtt-packet';
 import { saveMeasurement } from './controller/measurement.controller';
 
-const host = '192.168.1.133';
+const host = 'mosquitto';
 const port = '1883';
 const topic = 'power_consumption';
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;

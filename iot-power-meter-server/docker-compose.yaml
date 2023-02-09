@@ -10,14 +10,23 @@ services:
       NODE_ENV: production
 
   influxdb:
-    image: influxdb:2.5.1-alpine
+    image: arm32v7/influxdb
     container_name: influxdb
     restart: unless-stopped
     ports:
       - '8086:8086'
     volumes:
-      - influxdb_data:/var/lib/influxdb2
-
+      - influxdb_data:/var/lib/influxdb
+      - influxdb_config:/etc/influxdb
+    environment:
+      - INFLUXDB_CONFIG_PATH=/etc/influxdb/influxdb.conf
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=admin1234
+      - DOCKER_INFLUXDB_INIT_ORG=iot-power-meter
+      - DOCKER_INFLUXDB_INIT_BUCKET=power-consumption
+      - INFLUXDB_DB=power-consumption
+     
   grafana:
     image: grafana/grafana
     container_name: grafana-server
@@ -43,3 +52,5 @@ networks:
 volumes:
   grafana_data:
   influxdb_data:
+  influxdb_config:
+
