@@ -4,7 +4,6 @@ export const environment = {
     influxdb: {
         url: 'http://influxdb:8086',
         token: 'BQ44OJiBA2f4VAjB3nJWuY9aaL03EcftTjoRk6bfDs7R_Tlti-zTHdr7BWhaBlp3HQOg4ZpcBJgsQL0URmWrqA==',
-        org: 'iot-power-meter',
-        bucket: 'power-consumption',
+        org: 'iot_power_meter',
     }
 };

@@ -1,11 +1,11 @@
-import { FluxResultObserver, InfluxDB, Point } from '@influxdata/influxdb-client';
+import { InfluxDB, Point } from '@influxdata/influxdb-client'
 import { environment } from '../config/environment';
 import { MeasurementModel } from './model/measurement.db';
 
 const url = environment.influxdb.url;
 const token = environment.influxdb.token;
 const org = environment.influxdb.org;
-const bucket = environment.influxdb.bucket;
+const bucket = `${environment.influxdb.org}/autogen`;
 
 const MEASUREMENT_NAME = 'power';
 
@@ -37,7 +37,7 @@ export class DB {
     }
 
     public write(measurement: MeasurementModel) {
-        const writeApi = this.influxDB.getWriteApi(org, bucket, 'ms');
+        const writeApi = this.influxDB.getWriteApi('', bucket, 'ms');
 
         const point1 = new Point(MEASUREMENT_NAME)
             .tag('hour', '0-1')
