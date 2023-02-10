@@ -36,6 +36,7 @@
     "@influxdata/influxdb-client": "^1.33.0",
     "@influxdata/influxdb-client-apis": "^1.33.0",
     "axios": "^1.2.3",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "moment": "^2.29.4",
     "mqtt": "^4.3.7",

@@ -25,13 +25,23 @@ export class DB {
     }
 
     public read(startDate: Date, observer): FluxObserver<MeasurementModel> {
-        const queryApi = new InfluxDB({url, token}).getQueryApi(org);
+        const queryApi = new InfluxDB({url, token}).getQueryApi('');
 
         const fluxQuery = `from(bucket: "${bucket}")
                           |> range(start: ${startDate.getTime()/1000}, stop: now())
                           |> filter(fn: (r) => r["_measurement"] == "${MEASUREMENT_NAME}")
                           |> window(every: 1h)
-                          |> sum(column: "_value")`;
+                          |> reduce(fn: (r, accumulator) => ({
+                                total: accumulator.total + r._value,
+                              }),
+                              identity: {total: 0.0}
+                            )`;
+
+        /*const fluxQuery = `from(bucket: "${bucket}")
+                          |> range(start: ${startDate.getTime()/1000}, stop: now())
+                          |> filter(fn: (r) => r["_measurement"] == "${MEASUREMENT_NAME}")
+                          |> aggregateWindow(every: 1h, fn: sum)`;*/
+
         queryApi.queryRows(fluxQuery, observer);
         return observer;
     }

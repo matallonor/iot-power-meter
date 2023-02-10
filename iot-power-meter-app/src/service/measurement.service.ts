@@ -1,5 +1,5 @@
 import { httpGet } from './http';
-import { map } from 'rxjs';
+import { map, catchError } from 'rxjs';
 
 export const getSpentToday = () => {
     return httpGet('/measurement/month').pipe(
@@ -7,6 +7,11 @@ export const getSpentToday = () => {
             if (res.status === 200) {
                 return res.data;
             }
+            console.log(res);
+        }),
+        catchError(err => {
+            console.log(err);
+            return err;
         })
     );
 };

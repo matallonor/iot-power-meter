@@ -39,7 +39,8 @@ export class MeasurementDB {
         DB.Instance.read(DateUtil.startOfMonth(), {
             next(row, tableMeta) {
                 const o = tableMeta.toObject(row);
-                powerConsumed.push(toPowerConsumed(o));
+                const pc = toPowerConsumed(o);
+                powerConsumed.push(pc);
             },
             error(error) {
                 observable.error(error);
