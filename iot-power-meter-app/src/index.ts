@@ -12,7 +12,7 @@ function updateState(measurements) {
     const monthCost = measurements
         .map(measurement => measurement.cost)
         .reduce((acc, measurement) => acc + measurement)
-        .toFixed(3);
+        .toFixed(2);
 
     const todayMeasurements = measurements.filter(measurement => moment(measurement.date).isSame(new Date(), 'day'));
     let todayCost = 0.00;
@@ -20,14 +20,14 @@ function updateState(measurements) {
         todayCost = todayMeasurements
             .map(measurement => measurement.cost)
             .reduce((acc, measurement) => acc + measurement)
-            .toFixed(3);
+            .toFixed(2);
     }
 
     const todayEl = document.getElementById('spent-today');
     const monthEl = document.getElementById('spent-month');
 
-    todayEl.innerHTML = String(todayCost);
-    monthEl.innerHTML = String(monthCost);
+    todayEl.innerHTML = String(todayCost) + '€';
+    monthEl.innerHTML = String(monthCost) + '€';
 }
 
 function firstTimeSettings() {
