@@ -2,22 +2,32 @@
 import '../styles/styles.scss'; import '../index.html';
 
 import { getSpentToday } from './service/measurement.service';
-
-const state = {
-    today: null
-};
+import moment from 'moment';
 
 function fetchData() {
-    getSpentToday().subscribe(measurement => updateState(measurement));
+    getSpentToday().subscribe(measurements => updateState(measurements.powerConsumed));
 }
 
-function updateState(measurement) {
-    const element = document.getElementById('spent-today');
+function updateState(measurements) {
+    const monthCost = measurements
+        .map(measurement => measurement.cost)
+        .reduce((acc, measurement) => acc + measurement)
+        .toFixed(3);
 
-    state.today = measurement.powerConsumed[0];
-    element.innerHTML = state.today.cost;
+    const todayMeasurements = measurements.filter(measurement => moment(measurement.date).isSame(new Date(), 'day'));
+    let todayCost = 0.00;
+    if (todayMeasurements.length > 0) {
+        todayCost = todayMeasurements
+            .map(measurement => measurement.cost)
+            .reduce((acc, measurement) => acc + measurement)
+            .toFixed(3);
+    }
 
-    return element;
+    const todayEl = document.getElementById('spent-today');
+    const monthEl = document.getElementById('spent-month');
+
+    todayEl.innerHTML = String(todayCost);
+    monthEl.innerHTML = String(monthCost);
 }
 
 function firstTimeSettings() {

@@ -7,7 +7,6 @@ const http = axios.create({
 });
 
 export function httpGet(url: string, params: object = null): Observable<AxiosResponse> {
-    //http.get("http://192.168.1.133:8084"+url, { params }).then(res => console.log(res)).catch(err => console.log(err));
     return from(http.get(url, { params }));
 }
 
