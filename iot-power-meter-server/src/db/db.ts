@@ -4,7 +4,6 @@ import { MeasurementModel } from './model/measurement.db';
 
 const url = environment.influxdb.url;
 const token = environment.influxdb.token;
-const org = environment.influxdb.org;
 const bucket = `${environment.influxdb.org}/autogen`;
 
 const MEASUREMENT_NAME = 'power';
@@ -25,6 +24,7 @@ export class DB {
     }
 
     public read(startDate: Date, observer): FluxObserver<MeasurementModel> {
+        console.info('QUERYING DATA')
         const queryApi = new InfluxDB({url, token}).getQueryApi('');
 
         const fluxQuery = `from(bucket: "${bucket}")
@@ -37,16 +37,12 @@ export class DB {
                               identity: {total: 0.0}
                             )`;
 
-        /*const fluxQuery = `from(bucket: "${bucket}")
-                          |> range(start: ${startDate.getTime()/1000}, stop: now())
-                          |> filter(fn: (r) => r["_measurement"] == "${MEASUREMENT_NAME}")
-                          |> aggregateWindow(every: 1h, fn: sum)`;*/
-
         queryApi.queryRows(fluxQuery, observer);
         return observer;
     }
 
     public write(measurement: MeasurementModel) {
+        console.info('WRITING:', measurement);
         const writeApi = this.influxDB.getWriteApi('', bucket, 'ms');
 
         const point1 = new Point(MEASUREMENT_NAME)
@@ -57,12 +53,14 @@ export class DB {
         writeApi.writePoint(point1);
 
         writeApi.close().then((result) => {
-            console.log('WRITE FINISHED:', result);
+            console.info('WRITE FINISHED:');
+            console.table(result);
         }).catch(err => console.error(err));
     }
 }
 
 export interface FluxObserver<T> {
     next(row, tableMeta): { [p: string]: T };
-    error(error): void; complete(): void
+    error(error): void;
+    complete(): void
 }
