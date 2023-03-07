@@ -11,7 +11,8 @@ export interface MeasurementModel {
 export class MeasurementDB {
 
     static create(message: string): void {
-        const measurement: MeasurementModel = { value: Number(message), timestamp: Date.now() }
+        const [value, timestamp] = message.split('-'); 
+        const measurement: MeasurementModel = { value: Number(value), timestamp: Number(timestamp) };
         DB.Instance.write(measurement);
     }
 
@@ -39,6 +40,7 @@ export class MeasurementDB {
         DB.Instance.read(DateUtil.startOfMonth(), {
             next(row, tableMeta) {
                 const o = tableMeta.toObject(row);
+                console.table(o);
                 const pc = toPowerConsumed(o);
                 powerConsumed.push(pc);
             },

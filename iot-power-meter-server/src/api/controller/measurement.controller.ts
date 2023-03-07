@@ -1,9 +1,8 @@
 import { MeasurementDB } from '../../db/model/measurement.db';
 import { PowerConsumptionService } from '../../services/power-consumption/power-consumption.service';
 
-export const saveMeasurement = (topic: string, payload: Buffer) => {
-    console.info('MQTT MESSAGE:', payload.toString());
-    PowerConsumptionService.saveData(payload.toString());
+export const saveMeasurement = (message: string) => {
+    PowerConsumptionService.saveData(message);
 };
 
 export const getMeasurement = async (req, res) => {

@@ -5,7 +5,8 @@ import { saveMeasurement } from './controller/measurement.controller';
 
 const host = 'mosquitto';
 const port = '1883';
-const topic = 'power_consumption';
+const powerConsumptionTopic = 'power_consumption';
+const logTopic = 'pc_logging';
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
 const connectUrl = `mqtt://${host}:${port}`;
 
@@ -43,13 +44,21 @@ export class Mqtt {
     }
 
     private subscribeToTopic() {
-        this.client.subscribe([topic], { qos: 2 },(err: Error, granted: ISubscriptionGrant[]) => {
+        this.client.subscribe([powerConsumptionTopic, logTopic], { qos: 2 }, (err: Error, granted: ISubscriptionGrant[]) => {
             if (err) {
                 // TODO
                 //  MeasurementEvent.emit('mqttSubscriptionError', err);
                 console.log(err);
             }
-            this.client.on('message', saveMeasurement);
+            this.client.on('message', (topic: string, payload: Buffer) => {
+                if (topic === powerConsumptionTopic) {
+                    console.info('MQTT MESSAGE:', payload.toString());
+                    saveMeasurement(payload.toString());
+                } else {
+                    console.debug('ARDUINO_LOGGING:', payload.toString());
+                }
+            });
         })
     }
+
 }

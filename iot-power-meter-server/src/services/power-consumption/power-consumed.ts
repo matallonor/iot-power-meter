@@ -15,7 +15,6 @@ export const toPowerConsumed = (o): PowerConsumed => {
     if (hours[0] === hours[1]) {
         hour = `${hours[0]}-${Number(hours[1]) + 1}`;
     }
-console.log(hour);
     const rate: PowerRate = PowerRatesTable.Instance.get(hour);
     // const rate: PowerRate = { hour: '1', price: 120 };
     return { date: o._start, hour, power: o._value, cost: o.total * (rate?.price | 1) };
